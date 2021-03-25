@@ -8,14 +8,14 @@ class API {
 
   static Future<Employee> createEmployee(Employee employee) async {
     //business logic to send data to server
-    final http.Response response = await  http.post('http://dummy.restapiexample.com/api/v1/create/create',
+    final http.Response response = await  http.post('http://dummy.restapiexample.com/api/v1/create',
         headers: <String, String>{
-          'status': 'success'
+
         },
         body: jsonEncode(employee.toJson()));
 
     if (response.statusCode == 200) {
-      //print(response.body);
+      print(response.body);
       return Employee.fromJson(json.decode(response.body));
     } else {
       print('Error');

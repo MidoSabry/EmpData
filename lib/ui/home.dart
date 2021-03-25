@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
             print(snapshot.error);
             return Text('Sorry there is an error');
           }else{
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           }
 
         },
