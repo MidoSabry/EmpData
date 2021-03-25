@@ -10,6 +10,7 @@ class AddAuthor extends StatefulWidget {
 class _AddAuthorState extends State<AddAuthor> {
   String name;
   String age;
+  API api = new API();
 
   final addAuthor = GlobalKey<ScaffoldState>();
   @override
@@ -25,6 +26,7 @@ class _AddAuthorState extends State<AddAuthor> {
           child: Column(
             children: <Widget>[
               TextField(
+
                 decoration: InputDecoration(
                   labelText: 'Employee Name',
                   hintText: 'Enter Employee name',
@@ -52,12 +54,13 @@ class _AddAuthorState extends State<AddAuthor> {
                 onPressed: () {
                   //send data to the internet (aqueduct server)
 
-                  API.createEmployee(Employee(employee_name: name, employee_age: age))
+                 // API.createEmployee(Employee(employee_name: name, employee_age: age))
+                  api.createEmployee(name, age)
                       .then((author) {
                     //show snackbar
                     addAuthor.currentState.showSnackBar(SnackBar(
                         content: Text(
-                            'the author with id ${author.employee_name} has been created')));
+                            'the author with id  has been created')));
                     Navigator.pop(context);
                   });
                 },

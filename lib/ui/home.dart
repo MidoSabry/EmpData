@@ -10,12 +10,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  API api = new API();
   Future<List<Employee>> authors;
   @override
   void initState() {
     super.initState();
     setState(() {
-      authors = API.getAllEmployees();
+      authors = api.getAllEmployees();
     });
   }
 
@@ -67,7 +68,7 @@ class _HomeState extends State<Home> {
             ),
           );
           setState(() {
-            authors = API.getAllEmployees();
+            authors = api.getAllEmployees();
           });
         },
       ),
