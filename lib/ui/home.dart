@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:networking/model/author.dart';
+import 'package:networking/model/Employee.dart';
 import 'package:networking/network/api.dart';
 
-import 'add_author.dart';
+import 'add_employee.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -28,6 +28,7 @@ class _HomeState extends State<Home> {
       body: FutureBuilder<List<Employee>>(
         future: authors,
         builder: (context, snapshot) {
+
           if (snapshot.hasData) {
             return ListView.builder(
                 itemCount: snapshot.data.length,
@@ -48,9 +49,12 @@ class _HomeState extends State<Home> {
                   );
                 });
           } else if (snapshot.hasError) {
-            Text('Sorry there is an error');
+            print(snapshot.error);
+            return Text('Sorry there is an error');
+          }else{
+            return CircularProgressIndicator();
           }
-          return CircularProgressIndicator();
+
         },
       ),
       floatingActionButton: FloatingActionButton(

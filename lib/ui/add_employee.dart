@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:networking/model/author.dart';
+import 'package:networking/model/Employee.dart';
 import 'package:networking/network/api.dart';
 
 class AddAuthor extends StatefulWidget {
@@ -9,7 +9,7 @@ class AddAuthor extends StatefulWidget {
 
 class _AddAuthorState extends State<AddAuthor> {
   String name;
-  int age;
+  String age;
 
   final addAuthor = GlobalKey<ScaffoldState>();
   @override
@@ -43,7 +43,7 @@ class _AddAuthorState extends State<AddAuthor> {
                 ),
                 onChanged: (value) {
                   setState(() {
-                    age = int.parse(value);
+                    age = value;
                   });
                 },
               ),
@@ -51,8 +51,8 @@ class _AddAuthorState extends State<AddAuthor> {
                 child: Text('Save'),
                 onPressed: () {
                   //send data to the internet (aqueduct server)
-                  API
-                      .createEmployee(Employee(employee_name: name, employee_age: age))
+
+                  API.createEmployee(Employee(employee_name: name, employee_age: age))
                       .then((author) {
                     //show snackbar
                     addAuthor.currentState.showSnackBar(SnackBar(

@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:http/http.dart'as http;
-import 'package:http/http.dart';
-import 'package:networking/model/author.dart';
+
+import 'package:http/http.dart' as http;
+import 'package:networking/model/Employee.dart';
 
 class API {
-  static const String _BASE_URL = 'http://dummy.restapiexample.com/api/v1/employees';
+
   static Future<Employee> createEmployee(Employee employee) async {
     //business logic to send data to server
-    final Response response = await post('$_BASE_URL/employee',
+    final http.Response response = await  http.post('http://dummy.restapiexample.com/api/v1/create/create',
         headers: <String, String>{
           'status': 'success'
         },
@@ -18,22 +18,22 @@ class API {
       //print(response.body);
       return Employee.fromJson(json.decode(response.body));
     } else {
-      //print('Error');
+      print('Error');
       throw Exception("Can't load author");
     }
   }
 
   static Future<List<Employee>> getAllEmployees() async {
     //business logic to send data to server
-    final Response response = await get('http://dummy.restapiexample.com/api/v1/create/create');
+    final http.Response response = await http.get('http://dummy.restapiexample.com/api/v1/employees');
 
     if (response.statusCode == 200) {
       //print(response.body);
       //parse json into list of objects
-      final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
-      return parsed.map<Employee>((item) => Employee.fromJson(item)).toList();
+      final parsed = json.decode(response.body);
+      return parsed["data"].map<Employee>((item) => Employee.fromJson(item)).toList();
     } else {
-      print('Error');
+      print('Error'+response.body);
       throw Exception("Can't load ");
     }
   }
